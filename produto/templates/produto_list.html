@@ -2,7 +2,17 @@
 
 {% block content %}
 <div class="page-header">
-    <h2><i class="fa fa-user">Lista de produtos</i></h2>
+    <h2><i class="fa fa-user">
+        <h2>Lista de produtos
+            <spam class="pull-right">
+                <a href="{% url 'produto:produto_add' %}">
+                    <button type="button" class="btn btn-primary">
+                        <span class="fa fa-plus"></span>Adicionar
+                    </button>
+                </a>
+            </spam>
+        </h2>
+    </i></h2>
     {%if object_list%}
     <table class="table table-striped">
         <thead>

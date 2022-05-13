@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Estoque entrada
+    <spam class="pull-right">
+        <a href="#">
+            <button type="button" class="btn btn-primary">
+                <span class="fa fa-plus"></span>Adicionar
+            </button>
+        </a>
+    </spam>
+</h2>
+
+
+{% if object_list %}
+<table class="table table-striped">
+<thead>
+<tr>
+    <th>Item</th>
+    <th>Nf</th>
+    <th>Data</th>
+    <th>Funcionário</th>
+</tr>
+</thead>
+
+<tbody>
+{% for object in object_list %}
+<tr>
+    <td>
+        <a href="">{{object}}</a>
+    </td>
+    <td>{{object.nf_formated}}</td>
+    <td>{{object.created}}</td>
+    <td>{{object.funcionario.first_name}}</td>
+    <td>{{object}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p class="alert alert-waring">Sem itens na lista</p>
+{% endif %}
+
+
+{% endblock content %}

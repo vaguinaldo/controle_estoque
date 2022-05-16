@@ -24,9 +24,15 @@ class Estoque(TimeStampedModel):
     def ne_formated(self):
         return str(self.nf).zfill(3)
 
+    def get_absolute_url(self):
+        return reverse_lazy('estoque:estoque_entrada_detail', kwargs={'pk': self.pk})
+
 
 class EstoqueItens(models.Model):
-    estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE)
+    estoque = models.ForeignKey(
+        Estoque,
+        on_delete=models.CASCADE,
+        related_name='estoques')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField()
@@ -37,5 +43,4 @@ class EstoqueItens(models.Model):
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
 
-    def get_absolute_url(self):
-        return reverse_lazy('estoque:estoque_entrada_detail', kwargs={'pk': self.pk})
+

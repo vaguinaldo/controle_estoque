@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     #terceiros
     'widget_tweaks',
+    'bootstrap4',
 
     #my Apps
     'core',

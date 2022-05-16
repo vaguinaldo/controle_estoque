@@ -8,3 +8,8 @@ def estoque_entrada_list(request):
     context = {'object_list': objects}
     return render(request, template_name, context)
 
+def estoque_entrada_datail(request,pk):
+    template_name = 'estoque_entrada_detail.html'
+    obj = Estoque.objects.get(pk=pk)
+    context = {'object_list': obj}
+    return render(request, template_name, context)

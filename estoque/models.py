@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from core.models import TimeStampedModel
 from produto.models import Produto
+from django.urls import reverse_lazy
 
 MOVIMENTO=(
     ('e', 'entrada'),
@@ -35,3 +36,6 @@ class EstoqueItens(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
+
+    def get_absolute_url(self):
+        return reverse_lazy('estoque:estoque_entrada_detail', kwargs={'pk': self.pk})

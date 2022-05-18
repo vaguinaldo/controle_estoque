@@ -4,7 +4,7 @@ from core.models import TimeStampedModel
 from produto.models import Produto
 from django.urls import reverse_lazy
 
-MOVIMENTO=(
+MOVIMENTO = (
     ('e', 'entrada'),
     ('s', 'saida'),
 )
@@ -12,7 +12,7 @@ MOVIMENTO=(
 
 class Estoque(TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE)
-    nf = models.PositiveIntegerField('nota fiscal',null=True, blank=True)
+    nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
     movimento = models.CharField(max_length=1, choices=MOVIMENTO)
 
     class Meta:
@@ -26,6 +26,34 @@ class Estoque(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse_lazy('estoque:estoque_entrada_detail', kwargs={'pk': self.pk})
+
+
+class EstoqueEntradaManager(models.Manager):
+    def get_queryset(self):
+        return super(EstoqueEntradaManager, self).get_queryset().filter(movimento='e')
+
+
+class EstoqueEntrada(Estoque):
+    objects = EstoqueEntradaManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = 'estoque entrada'
+        verbose_name_plural = 'estoque entrada'
+
+
+class EstoqueSaidaManager(models.Manager):
+    def get_queryset(self):
+        return super(EstoqueSaidaManager, self).get_queryset().filter(movimento='s')
+
+
+class EstoqueSaida(Estoque):
+    objects = EstoqueSaidaManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = 'estoque saída'
+        verbose_name_plural = 'estoque saída'
 
 
 class EstoqueItens(models.Model):
@@ -42,5 +70,3 @@ class EstoqueItens(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.pk, self.estoque.pk, self.produto)
-
-

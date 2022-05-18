@@ -38,9 +38,9 @@ def estoque_entrada_add(request):
             prefix='estoque'
         )
         if form.is_valid() and formset.is_valid():
-            form = form.save(commit=False)
+            form = form.save()
             formset.save()
-            url = 'estoque:estoque_entrada_datail'
+            url = 'estoque:estoque_entrada_detail'
             return HttpResponseRedirect(resolve_url(url, form.pk))
 
     else:

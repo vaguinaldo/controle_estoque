@@ -52,7 +52,7 @@ $(document).on('change', '.clProduto', function() {
 $(document).on('change', '.clQuantidade', function() {
   quantidade = $(this).val();
   // Aqui é feito o cálculo de soma do estoque
-  saldo = Number(quantidade) + Number(estoque);
+  saldo =  Number(estoque) - Number(quantidade) ;
   campo = $(this).attr('id').replace('quantidade', 'saldo')
   $('#'+campo).val(saldo)
 

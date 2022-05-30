@@ -31,6 +31,7 @@ def dar_baixa_estoque(form):
 
     print('Estoque atualizado com sucesso.')
 
+
 @login_required()
 def estoque_entrada_add(request):
     template_name = 'estoque_entrada_form.html'
@@ -51,7 +52,8 @@ def estoque_entrada_add(request):
             prefix='estoque'
         )
         if form.is_valid() and formset.is_valid():
-            form = form.save()
+            form = form.save(commit=False)
+            form.funcionario = request.user
             form.movimento = 'e'
             form.save()
             formset.save()
@@ -79,6 +81,7 @@ def estoque_saida_datail(request, pk):
     context = {'object': obj}
     return render(request, template_name, context)
 
+
 @login_required()
 def estoque_saida_add(request):
     template_name = 'estoque_saida_form.html'
@@ -99,8 +102,9 @@ def estoque_saida_add(request):
             prefix='estoque'
         )
         if form.is_valid() and formset.is_valid():
-            form = form.save()
-            form.movimento='s'
+            form = form.save(commit=False)
+            form.funcionario = request.user
+            form.movimento = 's'
             form.save()
             formset.save()
             dar_baixa_estoque(form)

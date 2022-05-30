@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="row">
+    <div class="col-sm-6">
+        <form action="." method="GET" class="form-inline">
+            <input type="text" id="search" name="search" class="form-control" placeholder="Busca">
+            <input type="submit" class="btn btn-primary" style="margin-left: 10px;" value="OK">
+        </form>
+    </div>
+</div>
+
+
 <div class="page-header">
     <h2><i class="fa fa-user">
         <h2>Lista de produtos
@@ -51,5 +62,6 @@
     {% endif %}
 
 </div>
+{% include 'includes/pagination.html'%}
 
 {% endblock content %}

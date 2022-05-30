@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView
 from django.http import JsonResponse
@@ -17,6 +18,7 @@ def produto_detail(request, pk):
     context = {'object': obj}
     return render(request, template_name, context)
 
+
 def produto_add(request):
     template_name = 'produto_form.html'
     #obj = Produto.objects.get(pk=pk)
@@ -27,6 +29,7 @@ class ProdutoCreate(CreateView):
     model = Produto
     template_name = 'produto_form.html'
     form_class = ProdutoForm
+
 
 
 class ProdutoUpdate(UpdateView):
